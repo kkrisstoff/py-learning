@@ -1,6 +1,13 @@
-# point (x, y)
-# circle (xc, yc, r)
+# is point in circle
 def IsPointInCircle(x, y, xc, yc, r):
+    """
+    :param x: Int point X axis
+    :param y: Int point X axis
+    :param xc: Int circle X axis
+    :param yc: Int circle X axis
+    :param r: Int circle radius
+    :return: Bool
+    """
     x_ = abs(x - xc)
     y_ = abs(y - yc)
     return (x_ ** 2 + y_ ** 2) ** 0.5 <= r
