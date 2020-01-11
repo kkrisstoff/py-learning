@@ -3,6 +3,7 @@ input_file = open("input.txt", 'r', encoding='utf-8')
 out_file = open('output.txt', 'w', encoding='utf8')
 MIN_SCORE = 40
 
+
 def print_f(s):
     print(s, file=out_file)
 
@@ -11,6 +12,7 @@ students = list(input_file.readlines())
 places = int(students.pop(0))
 
 all_scores = []
+
 for student in students:
     student = student.split()
     t_1 = int(student[-1])
