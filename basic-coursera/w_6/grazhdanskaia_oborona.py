@@ -1,46 +1,44 @@
 # Civil Defence
-# TODO: Test 5 Time Limit Exceeded
+
 n = int(input())
-tws = list(map(int, input().split()))
-towns = []
-for i in range(n):
-    towns.append((i + 1, tws[i]))
-towns.sort(key=lambda point: point[1])
+towns = list(input().split())
+for i_t in range(n):
+    towns[i_t] = [int(towns[i_t]), i_t + 1, 0]
+towns.sort()
 
 m = int(input())
-shlts = list(map(int, input().split()))
-shelters = []
-for i in range(m):
-    shelters.append((i + 1, shlts[i]))
-shelters.sort(key=lambda point: point[1])
+shelters = list(input().split())
+for i_sh in range(m):
+    shelters[i_sh] = [int(shelters[i_sh]), i_sh + 1]
+shelters.sort()
 
 i = 0
-length = len(shelters)
-
-
-def get_nearest(curr_town):
-    global shelters
-    global i
-    while i < len(shelters):
-        nearest = shelters[0]
-        if shelters[i][1] > curr_town:
-            if abs(curr_town - shelters[i][1])\
-                    < abs(curr_town - shelters[i - 1][1]):
-                nearest = shelters[i]
-            else:
-                nearest = shelters[i - 1]
-            break
-        i += 1
-    # shelters = shelters[i-1:]
-    return nearest[0]
-    # arr = list(map(lambda x: (x[0], abs(curr_town - x[1])), shelters))
-    # nearest = min(arr, key=lambda x: x[1])
-    # return nearest[0]
-
-
-nearest_shelters = []
 for town in towns:
-    x_town = town[1]
-    nearest_shelters.append((town[0], get_nearest(x_town)))
+    # arr = list(map(lambda x: abs(town[0] - x[0]), shelters))
+    # min_pos = arr.index(min(arr))
+    # shelters = shelters[min_pos:]
 
-print(*list(map(lambda x: x[1], sorted(nearest_shelters))))
+    """
+    town = (len, id, shelterId)
+    shelter = (len, id)
+    """
+    curr_town = town[0]
+    if shelters[0][0] >= curr_town:
+        town[2] = shelters[0][1]
+        continue
+    if shelters[len(shelters) - 1][0] <= curr_town:
+        town[2] = shelters[len(shelters) - 1][1]
+        continue
+    while i < len(shelters):
+        if shelters[i][0] > curr_town:
+            if abs(curr_town - shelters[i - 1][0])\
+                    < abs(curr_town - shelters[i][0]):
+                town[2] = shelters[i - 1][1]
+            else:
+                town[2] = shelters[i][1]
+            break
+        else:
+            town[2] = shelters[i][1]
+        i += 1
+
+print(*map(lambda x: x[2], sorted(towns, key=lambda x: x[1])))

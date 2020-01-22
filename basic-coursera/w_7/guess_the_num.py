@@ -35,5 +35,4 @@ yes, no = check_answers(tests_list, answers_list)
 # print('+', yes)
 # print('-', no)
 
-ans = list(yes - no)
-print(*sorted(ans))
+print(*sorted(list(yes - no)))

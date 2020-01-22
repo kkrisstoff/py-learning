@@ -28,5 +28,4 @@ for line in stdin:
         handle_no(try_msg)
 
 print(*answers, sep='\n')
-ans = list(all_nums)
-print(*sorted(ans))
+print(*sorted(list(all_nums)))
